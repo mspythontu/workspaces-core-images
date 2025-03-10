@@ -25,6 +25,11 @@ ENV DEBIAN_FRONTEND=noninteractive \
 WORKDIR $HOME
 RUN mkdir -p $HOME/Desktop
 
+# 更新软件包列表并安装libssl3
+RUN apt-get update && \
+    apt-get install -y libssl3 && \
+    rm -rf /var/lib/apt/lists/*
+
 ### Support NVIDIA gpus for graphics acceleration
 RUN echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf && \
     echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf
